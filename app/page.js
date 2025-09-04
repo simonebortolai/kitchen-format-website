@@ -20,6 +20,7 @@ import {
 import { styled } from "@mui/material/styles";
 import AboutContent from "./components/AboutContent";
 import ForbiddenListContent from "./components/ForbiddenListContent";
+import GameChangersContent from "./components/GameChangersContent";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -44,7 +45,8 @@ const ContentCard = styled(Card)(({ theme }) => ({
 
 const tabs = [
   { id: "about", label: "About" },
-  { id: "forbidden", label: "Forbidden/Limited list" }
+  { id: "forbidden", label: "Forbidden/Limited" },
+  { id: "gamechangers", label: "Game Changers" }
 ];
 
 export default function Home() {
@@ -60,6 +62,8 @@ export default function Home() {
         return <AboutContent />;
       case 1:
         return <ForbiddenListContent />;
+      case 2:
+        return <GameChangersContent />;
       default:
         return <AboutContent />;
     }

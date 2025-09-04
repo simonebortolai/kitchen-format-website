@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   AppBar,
   Toolbar,
@@ -17,6 +18,8 @@ import {
   Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import AboutContent from "./components/AboutContent";
+import ForbiddenListContent from "./components/ForbiddenListContent";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -40,30 +43,9 @@ const ContentCard = styled(Card)(({ theme }) => ({
 }));
 
 const tabs = [
-  { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "contact", label: "Contact" }
+  { id: "forbidden", label: "Forbidden/Limited list" }
 ];
-
-const tabContent = {
-  home: {
-    title: "Welcome Home",
-    content: "This is the home page content. Here you can find the latest updates and featured information about our website."
-  },
-  about: {
-    title: "About Us",
-    content: "Learn more about our company, our mission, and our team. We are dedicated to providing excellent service and innovative solutions."
-  },
-  services: {
-    title: "Our Services",
-    content: "Discover the range of services we offer. From web development to consulting, we have the expertise to help you achieve your goals."
-  },
-  contact: {
-    title: "Contact Us",
-    content: "Get in touch with us today. We'd love to hear from you and discuss how we can help with your next project."
-  }
-};
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
@@ -72,7 +54,16 @@ export default function Home() {
     setActiveTab(newValue);
   };
 
-  const currentTabKey = tabs[activeTab].id;
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 0:
+        return <AboutContent />;
+      case 1:
+        return <ForbiddenListContent />;
+      default:
+        return <AboutContent />;
+    }
+  };
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
@@ -80,13 +71,25 @@ export default function Home() {
       <StyledAppBar position="static" elevation={0}>
         <Container maxWidth="lg">
           <Toolbar sx={{ justifyContent: "space-between", px: 0 }}>
-            <Typography
-              variant="h6"
-              component="h1"
-              sx={{ fontWeight: "bold" }}
-            >
-              Exiled Format
-            </Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Image
+                src="/exiled.jpg"
+                alt="Exiled Format Logo"
+                width={64}
+                height={64}
+                style={{
+                  borderRadius: "12px",
+                  objectFit: "cover"
+                }}
+              />
+              <Typography
+                variant="h2"
+                component="h1"
+                sx={{ fontWeight: "bold" }}
+              >
+                Exiled Format
+              </Typography>
+            </Box>
             
             {/* Navigation Tabs */}
             <Tabs
@@ -99,7 +102,12 @@ export default function Home() {
                 <Tab
                   key={tab.id}
                   label={tab.label}
-                  sx={{ minWidth: "auto", px: 2 }}
+                  sx={{ 
+                    minWidth: "auto", 
+                    px: 3,
+                    fontSize: "1.3rem",
+                    fontWeight: 600
+                  }}
                 />
               ))}
             </Tabs>
@@ -113,106 +121,7 @@ export default function Home() {
       {/* Content */}
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <ContentCard elevation={1}>
-          <CardContent sx={{ p: 4, "&:last-child": { pb: 4 } }}>
-            <Typography
-              variant="h3"
-              component="h2"
-              gutterBottom
-              sx={{ mb: 3 }}
-            >
-              {tabContent[currentTabKey].title}
-            </Typography>
-            
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              sx={{ lineHeight: 1.7, mb: 4 }}
-            >
-              {tabContent[currentTabKey].content}
-            </Typography>
-            
-            {/* Additional content area */}
-            <Divider sx={{ my: 3 }} />
-            
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: (theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.50',
-                    height: "100%",
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      gutterBottom
-                      sx={{ fontWeight: 600 }}
-                    >
-                      Featured Section
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      This content changes based on the selected tab: {currentTabKey}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              
-              <Grid item xs={12} md={6}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: (theme) => theme.palette.mode === 'dark' ? 'grey.800' : 'grey.50',
-                    height: "100%",
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h6"
-                      component="h3"
-                      gutterBottom
-                      sx={{ fontWeight: 600 }}
-                    >
-                      Quick Actions
-                    </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                      <Button
-                        variant="text"
-                        color="primary"
-                        sx={{ 
-                          justifyContent: "flex-start", 
-                          py: 1,
-                          '&:hover': {
-                            backgroundColor: (theme) => theme.palette.mode === 'dark' 
-                              ? 'rgba(96, 165, 250, 0.1)' 
-                              : 'rgba(37, 99, 235, 0.04)'
-                          }
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                      <Button
-                        variant="text"
-                        color="primary"
-                        sx={{ 
-                          justifyContent: "flex-start", 
-                          py: 1,
-                          '&:hover': {
-                            backgroundColor: (theme) => theme.palette.mode === 'dark' 
-                              ? 'rgba(96, 165, 250, 0.1)' 
-                              : 'rgba(37, 99, 235, 0.04)'
-                          }
-                        }}
-                      >
-                        Get Started
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </CardContent>
+          {renderTabContent()}
         </ContentCard>
       </Container>
     </Box>

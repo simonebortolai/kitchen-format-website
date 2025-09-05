@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import logoImage from "../public/mystic.webp";
 import {
   AppBar,
   Toolbar,
@@ -80,7 +81,7 @@ export default function Home() {
         <Toolbar sx={{ justifyContent: "space-between", px: 4 }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, py: 2 }}>
             <Image
-              src="/mystic.webp"
+              src={logoImage}
               alt="Kitchen Format Logo"
               width={64}
               height={64}

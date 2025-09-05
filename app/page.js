@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import AboutContent from "./components/AboutContent";
+import CardLegalityContent from "./components/CardLegalityContent";
 import ForbiddenListContent from "./components/ForbiddenListContent";
 import GameChangersContent from "./components/GameChangersContent";
 
@@ -45,7 +46,8 @@ const ContentCard = styled(Card)(({ theme }) => ({
 
 const tabs = [
   { id: "about", label: "Info" },
-  { id: "forbidden", label: "Carte Vietate/Limitate" },
+  { id: "legality", label: "Ricerca" },
+  { id: "forbidden", label: "Carte Bandite/Limitate" },
   { id: "gamechangers", label: "Game Changers" }
 ];
 
@@ -61,8 +63,10 @@ export default function Home() {
       case 0:
         return <AboutContent />;
       case 1:
-        return <ForbiddenListContent />;
+        return <CardLegalityContent />;
       case 2:
+        return <ForbiddenListContent />;
+      case 3:
         return <GameChangersContent />;
       default:
         return <AboutContent />;

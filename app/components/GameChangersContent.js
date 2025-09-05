@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Typography,
   Box,
@@ -9,7 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import cardData from '../../data/cards.json';
+import cardData from '../../data/cards.js';
 
 const GameChangersBubble = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
@@ -62,6 +63,7 @@ const CardImage = styled('img')(({ theme }) => ({
   padding: '1px', // Reduced from 2px
   borderRadius: '6px',
   transition: 'transform 0.2s ease-in-out',
+  cursor: 'pointer',
   '&:hover': {
     transform: 'scale(1.1)',
     zIndex: 1000,
@@ -72,7 +74,25 @@ const CardImage = styled('img')(({ theme }) => ({
 // Import game changers cards from JSON
 const gameChangersCards = cardData.gameChangers;
 
+// Function to convert card name to URL slug
+const getCardSlug = (cardName) => {
+  return cardName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim();
+};
+
+// Function to handle card click
+const handleCardClick = (card) => {
+  const slug = getCardSlug(card.name);
+  const url = `https://formatlibrary.com/cards/${slug}`;
+  window.open(url, '_blank');
+};
+
 export default function GameChangersContent() {
+
   const renderCardGrid = (cards, bgColor) => (
     <GameChangersFlexbox bgColor={bgColor}>
       {cards.map((card, index) => (
@@ -82,6 +102,7 @@ export default function GameChangersContent() {
               src={`https://cdn.formatlibrary.com/images/medium_cards/${card.id}.jpg`}
               alt={card.name}
               title={card.name}
+              onClick={() => handleCardClick(card)}
             />
           </CardImageCell>
         </CardImageBox>

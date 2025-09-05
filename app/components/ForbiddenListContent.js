@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Typography,
   Box,
@@ -9,7 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import cardData from "../../data/cards.json";
+import cardData from "../../data/cards.js";
 
 const BanlistBubble = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(4),
@@ -62,6 +63,7 @@ const CardImage = styled('img')(({ theme }) => ({
   padding: '1px', // Reduced from 2px
   borderRadius: '6px',
   transition: 'transform 0.2s ease-in-out',
+  cursor: 'pointer',
   '&:hover': {
     transform: 'scale(1.1)',
     zIndex: 1000,
@@ -72,7 +74,25 @@ const CardImage = styled('img')(({ theme }) => ({
 // Import card data from JSON
 const { forbidden: forbiddenCards, limited: limitedCards, semiLimited: semiLimitedCards } = cardData;
 
+// Function to convert card name to URL slug
+const getCardSlug = (cardName) => {
+  return cardName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim();
+};
+
+// Function to handle card click
+const handleCardClick = (card) => {
+  const slug = getCardSlug(card.name);
+  const url = `https://formatlibrary.com/cards/${slug}`;
+  window.open(url, '_blank');
+};
+
 export default function ForbiddenListContent() {
+
   const renderCardGrid = (cards, bgColor) => (
     <BanlistFlexbox bgColor={bgColor}>
       {cards.map((card, index) => (
@@ -82,6 +102,7 @@ export default function ForbiddenListContent() {
               src={`https://cdn.formatlibrary.com/images/medium_cards/${card.id}.jpg`}
               alt={card.name}
               title={card.name}
+              onClick={() => handleCardClick(card)}
             />
           </CardImageCell>
         </CardImageBox>
@@ -133,7 +154,7 @@ export default function ForbiddenListContent() {
 
       {/* Limited Cards */}
       <BanlistBubble>
-        <BanlistCategory categoryColor="#ff9800">
+        <BanlistCategory categoryColor="#ffd700">
           Limitate:
         </BanlistCategory>
         <Typography
@@ -143,12 +164,12 @@ export default function ForbiddenListContent() {
         >
           Puoi includere un massimo di 1 copia di queste carte nel tuo deck. Questo include il deck principale, side deck ed extra deck combinati.
         </Typography>
-        {renderCardGrid(limitedCards, 'rgba(255, 193, 7, 0.1)')}
+        {renderCardGrid(limitedCards, 'rgba(255, 215, 0, 0.2)')}
       </BanlistBubble>
 
       {/* Semi-Limited Cards */}
       <BanlistBubble>
-        <BanlistCategory categoryColor="#4caf50">
+        <BanlistCategory categoryColor="#8b4513">
           Semi-Limitate:
         </BanlistCategory>
         <Typography
@@ -158,7 +179,7 @@ export default function ForbiddenListContent() {
         >
           Puoi includere un massimo di 2 copie di queste carte nel tuo deck. Questo include il deck principale, side deck ed extra deck combinati.
         </Typography>
-        {renderCardGrid(semiLimitedCards, 'rgba(76, 175, 80, 0.1)')}
+        {renderCardGrid(semiLimitedCards, 'rgba(139, 69, 19, 0.2)')}
       </BanlistBubble>
     </CardContent>
   );

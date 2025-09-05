@@ -102,6 +102,12 @@ const CardRow = styled(Paper)(({ theme }) => ({
   gap: theme.spacing(3),
   border: `1px solid ${theme.palette.divider}`,
   borderRadius: theme.shape.borderRadius,
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1.5),
+    gap: theme.spacing(2),
+    flexDirection: 'column',
+    textAlign: 'center',
+  },
 }));
 
 const CardImageContainer = styled(Box)(({ theme }) => ({
@@ -119,6 +125,9 @@ const CardImage = styled('img')(({ theme }) => ({
   },
   '&:error': {
     display: 'none',
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100px',
   },
 }));
 
@@ -259,63 +268,65 @@ export default function CardLegalityContent() {
       return;
     }
 
-    const searchTerm = debouncedSearchTerm.toLowerCase();
-    
-    // Filter cards by searching across all language names
-    const filtered = processedCards.filter(card => {
-      // Check if search term matches any language name
-      return Object.values(card.names).some(name => 
-        name && name.toLowerCase().includes(searchTerm)
-      );
-    });
-    
-    // Sort by relevance: exact matches first, then starts with, then contains
-    const sorted = filtered.sort((a, b) => {
-      const getRelevanceScore = (card) => {
-        const names = Object.values(card.names).filter(Boolean);
-        const lowerNames = names.map(name => name.toLowerCase());
-        
-        // Exact match gets highest score
-        if (lowerNames.some(name => name === searchTerm)) return 1000;
-        
-        // Starts with search term gets high score
-        if (lowerNames.some(name => name.startsWith(searchTerm))) return 100;
-        
-        // Contains search term gets lower score (but prioritize shorter names)
-        const containsMatches = lowerNames.filter(name => name.includes(searchTerm));
-        if (containsMatches.length > 0) {
-          const shortestMatch = Math.min(...containsMatches.map(name => name.length));
-          return 50 - shortestMatch; // Shorter names get higher score
-        }
-        
-        return 0;
-      };
+    const performSearch = async () => {
+      const searchTerm = debouncedSearchTerm.toLowerCase();
       
-      return getRelevanceScore(b) - getRelevanceScore(a);
-    });
-    
-    // Store all filtered results
-    setAllFilteredResults(sorted);
-    
-    // Limit to current number of results to show
-    const limitedResults = sorted.slice(0, resultsToShow);
-    
-    // Add legality check for each card
-    const enrichedResults = Promise.all(
-      limitedResults.map(async (card) => {
-        const legalityResult = await isCardLegal(card.id);
-        return { 
-          ...card, 
-          isLegal: legalityResult.isLegal,
-          releaseDate: legalityResult.releaseDate
+      // Filter cards by searching across all language names
+      const filtered = processedCards.filter(card => {
+        // Check if search term matches any language name
+        return Object.values(card.names).some(name => 
+          name && name.toLowerCase().includes(searchTerm)
+        );
+      });
+      
+      // Sort by relevance: exact matches first, then starts with, then contains
+      const sorted = filtered.sort((a, b) => {
+        const getRelevanceScore = (card) => {
+          const names = Object.values(card.names).filter(Boolean);
+          const lowerNames = names.map(name => name.toLowerCase());
+          
+          // Exact match gets highest score
+          if (lowerNames.some(name => name === searchTerm)) return 1000;
+          
+          // Starts with search term gets high score
+          if (lowerNames.some(name => name.startsWith(searchTerm))) return 100;
+          
+          // Contains search term gets lower score (but prioritize shorter names)
+          const containsMatches = lowerNames.filter(name => name.includes(searchTerm));
+          if (containsMatches.length > 0) {
+            const shortestMatch = Math.min(...containsMatches.map(name => name.length));
+            return 50 - shortestMatch; // Shorter names get higher score
+          }
+          
+          return 0;
         };
-      })
-    );
-    
-    enrichedResults.then(results => {
-      setSearchResults(results);
-    });
-  }, [debouncedSearchTerm, cardLegality, resultsToShow, isCardLegal]);
+        
+        return getRelevanceScore(b) - getRelevanceScore(a);
+      });
+      
+      // Store all filtered results
+      setAllFilteredResults(sorted);
+      
+      // Limit to current number of results to show
+      const limitedResults = sorted.slice(0, resultsToShow);
+      
+      // Add legality check for each card
+      const enrichedResults = await Promise.all(
+        limitedResults.map(async (card) => {
+          const legalityResult = await isCardLegal(card.id);
+          return { 
+            ...card, 
+            isLegal: legalityResult.isLegal,
+            releaseDate: legalityResult.releaseDate
+          };
+        })
+      );
+      
+      setSearchResults(enrichedResults);
+    };
+
+    performSearch();
+  }, [debouncedSearchTerm, resultsToShow]);
 
   const getStatusChipProps = (status) => {
     switch (status) {

@@ -44,6 +44,26 @@ const BanlistFlexbox = styled(Paper, {
     flexBasis: 'calc(10% - 4px)', // Adjusted for smaller gap
     maxWidth: 'calc(10% - 4px)',
   },
+  [theme.breakpoints.down('md')]: {
+    padding: theme.spacing(2),
+    '& > *': {
+      flexBasis: 'calc(16.66% - 4px)', // 6 per row on medium screens
+      maxWidth: 'calc(16.66% - 4px)',
+    },
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1.5),
+    '& > *': {
+      flexBasis: 'calc(20% - 4px)', // 5 per row on small screens
+      maxWidth: 'calc(20% - 4px)',
+    },
+  },
+  [theme.breakpoints.down('xs')]: {
+    '& > *': {
+      flexBasis: 'calc(25% - 4px)', // 4 per row on extra small screens
+      maxWidth: 'calc(25% - 4px)',
+    },
+  },
 }));
 
 const CardImageBox = styled(Box)(({ theme }) => ({

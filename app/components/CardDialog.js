@@ -20,8 +20,14 @@ const CardDialog = ({ open, card, onClose }) => {
       onClose={onClose}
       maxWidth="md"
       fullWidth
+      fullScreen={false}
       PaperProps={{
-        sx: { borderRadius: 3, position: 'relative' }
+        sx: { 
+          borderRadius: { xs: 0, sm: 3 }, 
+          position: 'relative',
+          margin: { xs: 1, sm: 2 },
+          maxHeight: { xs: '95vh', sm: '90vh' }
+        }
       }}
     >
       {/* Close button in top-right corner */}
@@ -39,16 +45,22 @@ const CardDialog = ({ open, card, onClose }) => {
         <CloseIcon />
       </IconButton>
       
-      <DialogContent sx={{ pt: 3 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
+      <DialogContent sx={{ pt: 3, px: { xs: 2, sm: 3 } }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: { xs: 'column', md: 'row' }, 
+          gap: { xs: 3, md: 4 },
+          alignItems: { xs: 'center', md: 'flex-start' }
+        }}>
           {/* Card Image */}
-          <Box sx={{ flexShrink: 0 }}>
+          <Box sx={{ flexShrink: 0, textAlign: 'center' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.apiData?.card_images?.[0]?.image_url || `https://cdn.formatlibrary.com/images/cards/${card.cleanId || card.id.replace(/^0+/, '') || '0'}.jpg`}
               alt={card.name}
               style={{
-                width: '480px',
+                width: '320px',
+                maxWidth: '100%',
                 height: 'auto',
                 borderRadius: '12px',
                 boxShadow: '0 8px 16px rgba(0,0,0,0.2)'

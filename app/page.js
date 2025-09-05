@@ -61,7 +61,7 @@ const tabs = [
   { id: "about", label: "Info" },
   { id: "legality", label: "Ricerca" },
   { id: "forbidden", label: "Carte Bandite/Limitate" },
-  { id: "gamechangers", label: "Game Changers" }
+  { id: "gamechangers", label: "WildCard" }
 ];
 
 export default function Home() {

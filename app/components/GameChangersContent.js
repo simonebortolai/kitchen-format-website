@@ -93,7 +93,7 @@ const CardImage = styled('img')(({ theme }) => ({
   },
 }));
 
-// Import game changers cards from JSON
+// Import Jolly cards from JSON
 const gameChangersCards = cardData.gameChangers;
 
 // Function to convert card name to URL slug
@@ -134,7 +134,7 @@ export default function GameChangersContent() {
         gutterBottom
         sx={{ mb: 3 }}
       >
-        Game Changers
+        WildCards
       </Typography>
       
       <Typography
@@ -154,17 +154,17 @@ export default function GameChangersContent() {
         Ultimo aggiornamento: 5 settembre 2025
       </Typography>
       
-      {/* Game Changers Cards */}
+      {/* Jolly Cards */}
       <GameChangersBubble>
         <GameChangersCategory categoryColor="#9c27b0">
-          Game Changers:
+          WildCards:
         </GameChangersCategory>
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ mb: 3, lineHeight: 1.6 }}
         >
-          Puoi aggiungere un massimo di 1 copia di queste carte nel tuo deck, per un massimo di 2 carte game changers in totale nel tuo deck.
+          Puoi aggiungere un massimo di 1 copia di queste carte nel tuo deck, per un massimo di 2 carte Jolly in totale nel tuo deck.
         </Typography>
         {renderCardGrid(gameChangersCards, 'rgba(156, 39, 176, 0.1)')}
       </GameChangersBubble>

@@ -337,7 +337,7 @@ export default function CardLegalityContent() {
       case 'semi-limited':
         return { label: 'Semi-Limitata', sx: { backgroundColor: '#8b4513', color: '#ffffff', '&:hover': { backgroundColor: '#7a3d11' } } };
       case 'game-changer':
-        return { label: 'Game Changer', color: 'secondary' };
+        return { label: 'WildCard', color: 'secondary' };
       default:
         return null;
     }

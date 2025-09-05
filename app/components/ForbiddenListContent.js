@@ -134,7 +134,7 @@ export default function ForbiddenListContent() {
         gutterBottom
         sx={{ mb: 3 }}
       >
-        Lista Carte Bandite/Limitate
+        Lista Carte Bandite e/o Limitate
       </Typography>
       
       <Typography

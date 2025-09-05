@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Kitchen Format",
   description: "",
+  icons: {
+    icon: "/kitchen-format-website/back.png",
+  },
 };
 
 export default function RootLayout({ children }) {

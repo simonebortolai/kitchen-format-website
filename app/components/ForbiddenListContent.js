@@ -10,6 +10,8 @@ import {
   Paper,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import CardDialog from './CardDialog';
+import useCardDialog from './hooks/useCardDialog';
 import cardData from "../../data/cards.js";
 
 const BanlistBubble = styled(Box)(({ theme }) => ({
@@ -84,14 +86,8 @@ const getCardSlug = (cardName) => {
     .trim();
 };
 
-// Function to handle card click
-const handleCardClick = (card) => {
-  const slug = getCardSlug(card.name);
-  const url = `https://formatlibrary.com/cards/${slug}`;
-  window.open(url, '_blank');
-};
-
 export default function ForbiddenListContent() {
+  const { dialogOpen, selectedCard, handleCardClick, handleCloseDialog } = useCardDialog();
 
   const renderCardGrid = (cards, bgColor) => (
     <BanlistFlexbox bgColor={bgColor}>
@@ -181,6 +177,13 @@ export default function ForbiddenListContent() {
         </Typography>
         {renderCardGrid(semiLimitedCards, 'rgba(139, 69, 19, 0.2)')}
       </BanlistBubble>
+
+      {/* Card Details Dialog */}
+      <CardDialog
+        open={dialogOpen}
+        card={selectedCard}
+        onClose={handleCloseDialog}
+      />
     </CardContent>
   );
 }

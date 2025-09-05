@@ -10,6 +10,8 @@ import {
   Paper,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import CardDialog from './CardDialog';
+import useCardDialog from './hooks/useCardDialog';
 import cardData from '../../data/cards.js';
 
 const GameChangersBubble = styled(Box)(({ theme }) => ({
@@ -84,14 +86,8 @@ const getCardSlug = (cardName) => {
     .trim();
 };
 
-// Function to handle card click
-const handleCardClick = (card) => {
-  const slug = getCardSlug(card.name);
-  const url = `https://formatlibrary.com/cards/${slug}`;
-  window.open(url, '_blank');
-};
-
 export default function GameChangersContent() {
+  const { dialogOpen, selectedCard, handleCardClick, handleCloseDialog } = useCardDialog();
 
   const renderCardGrid = (cards, bgColor) => (
     <GameChangersFlexbox bgColor={bgColor}>
@@ -152,6 +148,13 @@ export default function GameChangersContent() {
         </Typography>
         {renderCardGrid(gameChangersCards, 'rgba(156, 39, 176, 0.1)')}
       </GameChangersBubble>
+
+      {/* Card Details Dialog */}
+      <CardDialog
+        open={dialogOpen}
+        card={selectedCard}
+        onClose={handleCloseDialog}
+      />
     </CardContent>
   );
 }

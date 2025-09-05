@@ -21,23 +21,25 @@ const CardDialog = ({ open, card, onClose }) => {
       maxWidth="md"
       fullWidth
       PaperProps={{
-        sx: { borderRadius: 3 }
+        sx: { borderRadius: 3, position: 'relative' }
       }}
     >
-      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
-        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-          {card.name}
-        </Typography>
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{ color: (theme) => theme.palette.grey[500] }}
-        >
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
+      {/* Close button in top-right corner */}
+      <IconButton
+        aria-label="close"
+        onClick={onClose}
+        sx={{ 
+          position: 'absolute', 
+          right: 8, 
+          top: 8, 
+          color: (theme) => theme.palette.grey[500],
+          zIndex: 1
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       
-      <DialogContent sx={{ pt: 2 }}>
+      <DialogContent sx={{ pt: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
           {/* Card Image */}
           <Box sx={{ flexShrink: 0 }}>
@@ -45,7 +47,7 @@ const CardDialog = ({ open, card, onClose }) => {
               src={card.apiData?.card_images?.[0]?.image_url || `https://cdn.formatlibrary.com/images/cards/${card.cleanId || card.id.replace(/^0+/, '') || '0'}.jpg`}
               alt={card.name}
               style={{
-                width: '400px',
+                width: '480px',
                 height: 'auto',
                 borderRadius: '12px',
                 boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
@@ -138,14 +140,15 @@ const CardDialog = ({ open, card, onClose }) => {
                           Card Text
                         </Typography>
                         <Typography 
-                          variant="body2" 
+                          variant="body1" 
                           sx={{ 
                             lineHeight: 1.6, 
                             backgroundColor: 'rgba(0,0,0,0.02)', 
                             p: 2, 
                             borderRadius: 1,
                             maxHeight: '200px',
-                            overflowY: 'auto'
+                            overflowY: 'auto',
+                            fontSize: '1rem'
                           }}
                         >
                           {cardInfo?.desc || cardInfo?.text?.en?.effect || 'No description available'}

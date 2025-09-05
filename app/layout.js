@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Exiled Format",
+  title: "Kitchen Format",
   description: "",
 };
 

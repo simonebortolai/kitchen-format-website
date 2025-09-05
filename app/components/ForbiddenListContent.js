@@ -8,8 +8,87 @@ import {
   Divider,
   Paper,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import cardData from "../../data/cards.json";
+
+const BanlistBubble = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+}));
+
+const BanlistCategory = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== 'categoryColor',
+})(({ theme, categoryColor }) => ({
+  fontSize: '1.5rem',
+  fontWeight: 'bold',
+  marginBottom: theme.spacing(2),
+  color: categoryColor || theme.palette.text.primary,
+}));
+
+const BanlistFlexbox = styled(Paper, {
+  shouldForwardProp: (prop) => prop !== 'bgColor',
+})(({ theme, bgColor }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: theme.spacing(0.5), // Reduced from 1.5 to 0.5
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
+  padding: theme.spacing(3),
+  backgroundColor: bgColor || theme.palette.background.paper,
+  border: `2px solid ${bgColor ? bgColor.replace('0.1', '0.3') : theme.palette.divider}`,
+  borderRadius: theme.shape.borderRadius,
+  maxWidth: '100%',
+  '& > *': {
+    flexBasis: 'calc(10% - 4px)', // Adjusted for smaller gap
+    maxWidth: 'calc(10% - 4px)',
+  },
+}));
+
+const CardImageBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
+const CardImageCell = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  display: 'inline-block',
+}));
+
+const CardImage = styled('img')(({ theme }) => ({
+  width: '100%', // Make it responsive to container width
+  maxWidth: '100px', // Increased from 84px
+  height: 'auto',
+  margin: '0px',
+  padding: '1px', // Reduced from 2px
+  borderRadius: '6px',
+  transition: 'transform 0.2s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.1)',
+    zIndex: 1000,
+    position: 'relative',
+  },
+}));
+
+// Import card data from JSON
+const { forbidden: forbiddenCards, limited: limitedCards, semiLimited: semiLimitedCards } = cardData;
 
 export default function ForbiddenListContent() {
+  const renderCardGrid = (cards, bgColor) => (
+    <BanlistFlexbox bgColor={bgColor}>
+      {cards.map((card, index) => (
+        <CardImageBox key={index}>
+          <CardImageCell>
+            <CardImage
+              src={`https://cdn.formatlibrary.com/images/medium_cards/${card.id}.jpg`}
+              alt={card.name}
+              title={card.name}
+            />
+          </CardImageCell>
+        </CardImageBox>
+      ))}
+    </BanlistFlexbox>
+  );
+
   return (
     <CardContent sx={{ p: 4, "&:last-child": { pb: 4 } }}>
       <Typography
@@ -18,178 +97,69 @@ export default function ForbiddenListContent() {
         gutterBottom
         sx={{ mb: 3 }}
       >
-        Forbidden/Limited List
+        Lista Carte Bandite/Limitate
       </Typography>
       
       <Typography
         variant="h6"
         color="text.secondary"
-        sx={{ lineHeight: 1.7, mb: 4 }}
+        sx={{ lineHeight: 1.7, mb: 2 }}
       >
-        View the current list of forbidden and limited cards in the Exiled format. This list is maintained to ensure balanced and enjoyable gameplay for all players.
+        Visualizza l'attuale lista delle carte bandite e limitate nel formato Kitchen. Questa lista viene mantenuta per garantire un gameplay equilibrato e divertente per tutti i giocatori.
       </Typography>
       
-      {/* Card Lists */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {/* Forbidden Cards */}
-        <Box>
-          <Typography
-            variant="h4"
-            component="h3"
-            gutterBottom
-            sx={{ 
-              fontWeight: 600,
-              color: 'error.main',
-              mb: 1
-            }}
-          >
-            Forbidden
-          </Typography>
-          
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ 
-              lineHeight: 1.6,
-              mb: 3
-            }}
-          >
-            Cards completely banned from play
-          </Typography>
-          
-          <Paper
-            elevation={3}
-            sx={{
-              backgroundColor: 'rgba(244, 67, 54, 0.1)', // Red transparent
-              border: '2px solid rgba(244, 67, 54, 0.3)',
-              p: 3,
-              width: '100%',
-              height: '150px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              sx={{ 
-                textAlign: 'center',
-                fontStyle: 'italic'
-              }}
-            >
-              Work in Progress
-            </Typography>
-          </Paper>
-        </Box>
-        
-        {/* Limited Cards */}
-        <Box>
-          <Typography
-            variant="h4"
-            component="h3"
-            gutterBottom
-            sx={{ 
-              fontWeight: 600,
-              color: 'warning.main',
-              mb: 1
-            }}
-          >
-            Limited
-          </Typography>
-          
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ 
-              lineHeight: 1.6,
-              mb: 3
-            }}
-          >
-            Maximum 1 copy per deck
-          </Typography>
-          
-          <Paper
-            elevation={3}
-            sx={{
-              backgroundColor: 'rgba(255, 193, 7, 0.1)', // Yellow transparent
-              border: '2px solid rgba(255, 193, 7, 0.3)',
-              p: 3,
-              width: '100%',
-              height: '150px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              sx={{ 
-                textAlign: 'center',
-                fontStyle: 'italic'
-              }}
-            >
-              Work in Progress
-            </Typography>
-          </Paper>
-        </Box>
-        
-        {/* Semi-Limited Cards */}
-        <Box>
-          <Typography
-            variant="h4"
-            component="h3"
-            gutterBottom
-            sx={{ 
-              fontWeight: 600,
-              color: 'success.main',
-              mb: 1
-            }}
-          >
-            Semi-limited
-          </Typography>
-          
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ 
-              lineHeight: 1.6,
-              mb: 3
-            }}
-          >
-            Maximum 2 copies per deck
-          </Typography>
-          
-          <Paper
-            elevation={3}
-            sx={{
-              backgroundColor: 'rgba(76, 175, 80, 0.1)', // Green transparent
-              border: '2px solid rgba(76, 175, 80, 0.3)',
-              p: 3,
-              width: '100%',
-              height: '150px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography
-              variant="h6"
-              color="text.secondary"
-              sx={{ 
-                textAlign: 'center',
-                fontStyle: 'italic'
-              }}
-            >
-              Work in Progress
-            </Typography>
-          </Paper>
-        </Box>
-      </Box>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ fontStyle: 'italic', mb: 4 }}
+      >
+        Ultimo aggiornamento: 5 settembre 2025
+      </Typography>
+      
+      {/* Forbidden Cards */}
+      <BanlistBubble>
+        <BanlistCategory categoryColor="#f44336">
+          Bandite:
+        </BanlistCategory>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ mb: 3, lineHeight: 1.6 }}
+        >
+          Queste carte sono completamente bandite. Non puoi includere nessuna copia di queste carte nel tuo deck principale, side deck o extra deck.
+        </Typography>
+        {renderCardGrid(forbiddenCards, 'rgba(244, 67, 54, 0.1)')}
+      </BanlistBubble>
+
+      {/* Limited Cards */}
+      <BanlistBubble>
+        <BanlistCategory categoryColor="#ff9800">
+          Limitate:
+        </BanlistCategory>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ mb: 3, lineHeight: 1.6 }}
+        >
+          Puoi includere un massimo di 1 copia di queste carte nel tuo deck. Questo include il deck principale, side deck ed extra deck combinati.
+        </Typography>
+        {renderCardGrid(limitedCards, 'rgba(255, 193, 7, 0.1)')}
+      </BanlistBubble>
+
+      {/* Semi-Limited Cards */}
+      <BanlistBubble>
+        <BanlistCategory categoryColor="#4caf50">
+          Semi-Limitate:
+        </BanlistCategory>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ mb: 3, lineHeight: 1.6 }}
+        >
+          Puoi includere un massimo di 2 copie di queste carte nel tuo deck. Questo include il deck principale, side deck ed extra deck combinati.
+        </Typography>
+        {renderCardGrid(semiLimitedCards, 'rgba(76, 175, 80, 0.1)')}
+      </BanlistBubble>
     </CardContent>
   );
 }

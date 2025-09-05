@@ -17,7 +17,7 @@ export default function AboutContent() {
         gutterBottom
         sx={{ mb: 3 }}
       >
-        About Exiled Format
+        Info sul Formato Kitchen
       </Typography>
       
       <Typography
@@ -25,10 +25,10 @@ export default function AboutContent() {
         color="text.secondary"
         sx={{ lineHeight: 1.7, mb: 4 }}
       >
-        Learn more about the Exiled format, its rules, and how it differs from other Yu-Gi-Oh! formats. Discover the philosophy behind this community-driven format.
+        Scopri di più sul formato Kitchen, le sue regole e come si differenzia dagli altri formati di Yu-Gi-Oh!. Esplora la filosofia dietro questo formato guidato dalla community.
 
 
-        WORK IN PROGRESS
+        LAVORI IN CORSO
       </Typography>
       
      

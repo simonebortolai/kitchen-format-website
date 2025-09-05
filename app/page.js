@@ -44,8 +44,8 @@ const ContentCard = styled(Card)(({ theme }) => ({
 }));
 
 const tabs = [
-  { id: "about", label: "About" },
-  { id: "forbidden", label: "Forbidden/Limited" },
+  { id: "about", label: "Info" },
+  { id: "forbidden", label: "Carte Vietate/Limitate" },
   { id: "gamechangers", label: "Game Changers" }
 ];
 
@@ -72,51 +72,49 @@ export default function Home() {
   return (
     <Box sx={{ minHeight: "100vh" }}>
       {/* Header */}
-      <StyledAppBar position="static" elevation={0}>
-        <Container maxWidth="lg">
-          <Toolbar sx={{ justifyContent: "space-between", px: 0 }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Image
-                src="/exiled.jpg"
-                alt="Exiled Format Logo"
-                width={64}
-                height={64}
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover"
+      <StyledAppBar position="sticky" elevation={0}>
+        <Toolbar sx={{ justifyContent: "space-between", px: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2, py: 2 }}>
+            <Image
+              src="/mystic.webp"
+              alt="Kitchen Format Logo"
+              width={64}
+              height={64}
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover"
+              }}
+            />
+            <Typography
+              variant="h3"
+              component="h1"
+              sx={{ fontWeight: "bold" }}
+            >
+              Kitchen Format
+            </Typography>
+          </Box>
+          
+          {/* Navigation Tabs */}
+          <Tabs
+            value={activeTab}
+            onChange={handleTabChange}
+            textColor="primary"
+            indicatorColor="primary"
+          >
+            {tabs.map((tab, index) => (
+              <Tab
+                key={tab.id}
+                label={tab.label}
+                sx={{ 
+                  minWidth: "auto", 
+                  px: 3,
+                  fontSize: "1.3rem",
+                  fontWeight: 600
                 }}
               />
-              <Typography
-                variant="h2"
-                component="h1"
-                sx={{ fontWeight: "bold" }}
-              >
-                Exiled Format
-              </Typography>
-            </Box>
-            
-            {/* Navigation Tabs */}
-            <Tabs
-              value={activeTab}
-              onChange={handleTabChange}
-              textColor="primary"
-              indicatorColor="primary"
-            >
-              {tabs.map((tab, index) => (
-                <Tab
-                  key={tab.id}
-                  label={tab.label}
-                  sx={{ 
-                    minWidth: "auto", 
-                    px: 3,
-                    fontSize: "1.3rem",
-                    fontWeight: 600
-                  }}
-                />
-              ))}
-            </Tabs>
-          </Toolbar>
-        </Container>
+            ))}
+          </Tabs>
+        </Toolbar>
       </StyledAppBar>
 
       {/* Divider */}

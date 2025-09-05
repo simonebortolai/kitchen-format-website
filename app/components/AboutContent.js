@@ -20,7 +20,7 @@ export default function AboutContent() {
           fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
         }}
       >
-        Cos'è il Kitchen Format?
+        Cos&apos;è il Kitchen Format?
       </Typography>
       
       <Typography
@@ -35,7 +35,7 @@ export default function AboutContent() {
           '& .highlight-error': { fontWeight: 'bold', fontStyle: 'italic', color: 'error.main' }
         }}
       >
-        Il formato Kitchen si basa sull'idea di avere una <span className="highlight-primary">vasta gamma di carte tra cui scegliere</span>, dalle iconiche del passato a quelle più bilanciate dell'era moderna. Le carte ammesse sono tutte quelle rilasciate fino al <span className="highlight-warning">10 luglio 2014</span>, <span className="highlight-error">il giorno prima che tutto venisse rovinato con l'uscita dei Pendulum</span>.
+        Il formato Kitchen si basa sull&apos;idea di avere una <span className="highlight-primary">vasta gamma di carte tra cui scegliere</span>, dalle iconiche del passato a quelle più bilanciate dell&apos;era moderna. Le carte ammesse sono tutte quelle rilasciate fino al <span className="highlight-warning">10 luglio 2014</span>, <span className="highlight-error">il giorno prima che tutto venisse rovinato con l&apos;uscita dei Pendulum</span>.
       </Typography>
 
       {/* Three cards display */}
@@ -173,7 +173,7 @@ export default function AboutContent() {
           '& .highlight-kitchen': { fontWeight: 'bold', fontStyle: 'italic', color: 'primary.main' }
         }}
       >
-        Il Kitchen Format è un <span className="highlight-primary">formato in continua evoluzione</span>, con una <span className="highlight-secondary">lista di WildCards sempre in revisione</span> per mantenere l'equilibrio competitivo. Vengono incentivati i <span className="highlight-warning">mazzi creativi e sperimentali</span> per un'esperienza autentica in pieno stile <span className="highlight-kitchen">"Kitchen Table"</span>, da cui deriva il nome del formato. L'obiettivo è ricreare l'atmosfera casalinga e divertente del gioco tra amici, dove la creatività e l'innovazione sono più importanti della pura competitività.
+        Il Kitchen Format è un <span className="highlight-primary">formato in continua evoluzione</span>, con una <span className="highlight-secondary">lista di WildCards sempre in revisione</span> per mantenere l&apos;equilibrio competitivo. Vengono incentivati i <span className="highlight-warning">mazzi creativi e sperimentali</span> per un&apos;esperienza autentica in pieno stile <span className="highlight-kitchen">&quot;Kitchen Table&quot;</span>, da cui deriva il nome del formato. L&apos;obiettivo è ricreare l&apos;atmosfera casalinga e divertente del gioco tra amici, dove la creatività e l&apos;innovazione sono più importanti della pura competitività.
       </Typography>
         
     </CardContent>

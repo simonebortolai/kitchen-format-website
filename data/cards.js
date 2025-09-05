@@ -51,7 +51,6 @@ export const cardData = {
     { "name": "Monster Reborn", "id": "83764719" },
     { "name": "Painful Choice", "id": "74191942" },
     { "name": "Pot of Avarice", "id": "67169062" },
-    { "name": "Pot of Greed", "id": "55144522" },
     { "name": "Premature Burial", "id": "70828912" },
     { "name": "Raigeki", "id": "12580477" },
     { "name": "Snatch Steal", "id": "45986603" },
@@ -68,7 +67,6 @@ export const cardData = {
     { "name": "Royal Oppression", "id": "93016201" },
     { "name": "Self-Destruct Button", "id": "57585212" },
     { "name": "Sixth Sense", "id": "3280747" },
-    { "name": "Solemn Judgment", "id": "41420027" },
     { "name": "Time Seal", "id": "35316708" },
     { "name": "Trap Dustshoot", "id": "64697231" },
     { "name": "Ultimate Offering", "id": "80604092" }
@@ -170,6 +168,8 @@ export const cardData = {
     { "name": "Sangan", "id": "26202165" },
     { "name": "Mystik Wok", "id": "80161395" },
     { "name": "Exiled Force", "id": "74131780" },
+    { "name": "Pot of Greed", "id": "55144522" },
+    { "name": "Solemn Judgment", "id": "41420027" },
   ]
 };
 

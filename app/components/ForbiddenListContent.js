@@ -122,7 +122,7 @@ export default function ForbiddenListContent() {
         color="text.secondary"
         sx={{ lineHeight: 1.7, mb: 2 }}
       >
-        Visualizza l'attuale lista delle carte bandite e limitate nel formato Kitchen. Questa lista viene mantenuta per garantire un gameplay equilibrato e divertente per tutti i giocatori.
+        Visualizza l&apos;attuale lista delle carte bandite e limitate nel formato Kitchen. Questa lista viene mantenuta per garantire un gameplay equilibrato e divertente per tutti i giocatori.
       </Typography>
       
       <Typography

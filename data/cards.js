@@ -2,9 +2,7 @@ export const cardData = {
   "forbidden": [
     { "name": "Burner, Dragon Ruler of Sparks", "id": "53797637" },
     { "name": "Chaos Emperor Dragon - Envoy of the End", "id": "82301904" },
-    { "name": "Cyber Jar", "id": "34124316" },
     { "name": "Cyber-Stein", "id": "69015963" },
-    { "name": "Dark Magician of Chaos", "id": "40737112" },
     { "name": "Destiny HERO - Disk Commander", "id": "56570271" },
     { "name": "Elemental HERO Stratos", "id": "40044918" },
     { "name": "Fiber Jar", "id": "78706415" },
@@ -14,11 +12,8 @@ export const cardData = {
     { "name": "Magical Scientist", "id": "34206604" },
     { "name": "Makyura the Destructor", "id": "21593977" },
     { "name": "Mind Master", "id": "96782886" },
-    { "name": "Morphing Jar", "id": "33508719" },
-    { "name": "Morphing Jar #2", "id": "79106360" },
     { "name": "Reactan, Dragon Ruler of Pebbles", "id": "91020571" },
     { "name": "Rescue Cat", "id": "14878871" },
-    { "name": "Sangan", "id": "26202165" },
     { "name": "Sinister Serpent", "id": "8131171" },
     { "name": "Stream, Dragon Ruler of Droplets", "id": "27415516" },
     { "name": "Substitoad", "id": "20663556" },
@@ -168,6 +163,11 @@ export const cardData = {
     { "name": "Ojama Trio", "id": "29843091" }
   ],
   "gameChangers": [
+    { "name": "Dark Magician of Chaos", "id": "40737112" },
+    { "name": "Cyber Jar", "id": "34124316" },
+    { "name": "Morphing Jar", "id": "33508719" },
+    { "name": "Morphing Jar #2", "id": "79106360" },
+    { "name": "Sangan", "id": "26202165" },
     { "name": "Mystik Wok", "id": "80161395" },
     { "name": "Exiled Force", "id": "74131780" },
   ]

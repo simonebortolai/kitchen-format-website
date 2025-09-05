@@ -315,7 +315,7 @@ export default function CardLegalityContent() {
     enrichedResults.then(results => {
       setSearchResults(results);
     });
-  }, [debouncedSearchTerm, cardLegality, resultsToShow]);
+  }, [debouncedSearchTerm, cardLegality, resultsToShow, isCardLegal]);
 
   const getStatusChipProps = (status) => {
     switch (status) {
@@ -444,7 +444,7 @@ export default function CardLegalityContent() {
         {searchTerm.trim() !== '' && searchResults.length === 0 && (
           <Paper sx={{ p: 3, textAlign: 'center' }}>
             <Typography color="text.secondary">
-              Nessuna carta trovata per "{searchTerm}"
+              Nessuna carta trovata per &quot;{searchTerm}&quot;
             </Typography>
           </Paper>
         )}

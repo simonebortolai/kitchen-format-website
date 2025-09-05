@@ -43,6 +43,7 @@ const CardDialog = ({ open, card, onClose }) => {
         <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
           {/* Card Image */}
           <Box sx={{ flexShrink: 0 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.apiData?.card_images?.[0]?.image_url || `https://cdn.formatlibrary.com/images/cards/${card.cleanId || card.id.replace(/^0+/, '') || '0'}.jpg`}
               alt={card.name}
